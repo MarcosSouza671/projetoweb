@@ -1,3 +1,6 @@
+<?php
+require_once("controller/ControllerCadastro.php");
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +35,7 @@
 		</div>
 		<div class="row">
 			<div class="card mb-3 col-12">
-				<div class="card-body">
+				<div class="card-body" style="margin: auto;">
 					<h5 class="card-title">Consultar - Contatos Agendados</h5>
 					<table class="table table-responsive" style="width: auto;">
 						<thead class="table-active bg-primary">
@@ -46,18 +49,38 @@
 							</tr>
 						</thead>
 						<tbody id="TableData">
-							<tr>
-								<td scope="row">Jeferson Roberto de Lima</td>
-								<td>(11)97665-0099</td>
-								<td>Google Meu Negócio</td>
-								<td>25/05/2021</td>
-								<td>Serviço agendado para 01/07/2021</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" style="width: 72px;">Editar</button>
-									<button type="button" class="btn btn-outline-primary" style="width: 72px;">Excluir</button>
-								</td>
-							</tr>
+						<?php
+							$controller = new ControllerCadastro();
+							$resultado = $controller->listar();
+							//print_r($resultado);
+							for($i=0;$i<count($resultado);$i++){ 
+						?>
+								<tr>
+									<td scope="col"><?php echo $resultado[$i]['nome']; ?></td>
+									<td scope="col"><?php echo $resultado[$i]['telefone']; ?></td>
+									<td scope="col"><?php echo $resultado[$i]['origem']; ?></td>
+									<td scope="col"><?php echo $resultado[$i]['data_contato']; ?></td>
+									<td scope="col"><?php echo $resultado[$i]['observacao']; ?></td>
+									<td scope="col">
+										<button type="button" class="btn btn-outline-primary" style="width: 72px;">Editar</button>
+										<button type="button" class="btn btn-outline-primary" style="width: 72px;">Excluir</button>
+									</td>
+								</tr>
+						<?php
+							}
+						?>
 						</tbody>
+						<!--<tr>
+							<td scope="row">Jeferson Roberto de Lima</td>
+							<td>(11)97665-0099</td>
+							<td>Google Meu Negócio</td>
+							<td>25/05/2021</td>
+							<td>Serviço agendado para 01/07/2021</td>
+							<td>
+								<button type="button" class="btn btn-outline-primary" style="width: 72px;">Editar</button>
+								<button type="button" class="btn btn-outline-primary" style="width: 72px;">Excluir</button>
+							</td>
+						</tr>-->
 					</table>
 				</div>
 			</div>
